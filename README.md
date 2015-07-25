@@ -1,10 +1,10 @@
 # WaterController
-Files for ESP8266 Irrigation project
+Files for ESP8266 Irrigation project<BR>
 Files include:
-init.lua
-control.lua
-servernode.lua
-stop.lua
-index.php
-action_page.php
-lastcmd.txt
+<BR>init.lua
+<BR>control.lua
+<BR>servernode.lua
+<BR>stop.lua
+<BR>index.php
+<BR>action_page.php
+<BR>lastcmd.txt
