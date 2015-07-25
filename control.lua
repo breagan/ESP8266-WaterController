@@ -101,4 +101,5 @@ print(node.heap())
           end)
      end)
 end)
+
 collectgarbage()
