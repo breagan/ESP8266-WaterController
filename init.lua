@@ -11,5 +11,6 @@ gpio.mode(zone1, gpio.OUTPUT)
 gpio.write(zone1, gpio.LOW)
 gpio.mode(zone2, gpio.OUTPUT)
 gpio.write(zone2, gpio.LOW)
+
 collectgarbage()
 dofile("servernode.lua") --  starts the server script.  comment this out while depugging.  Start the server manually untill you are sure it is working.  Avoid death loop.
