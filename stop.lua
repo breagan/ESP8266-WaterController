@@ -1,5 +1,4 @@
 --  Sets all gpios to LOW and resets variables.
-collectgarbage()
 tmr.stop(0)
 tmr.stop(1)
 tmr.stop(2)
@@ -11,3 +10,4 @@ multiplyer = nil
 zone0time = nil
 zone1time = nil
 zone2time = nil
+collectgarbage()
