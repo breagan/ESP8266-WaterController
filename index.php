@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 <head>
 <title>ESP Water Controller</title>
@@ -19,7 +19,7 @@ height:50%;
 <?php
 $t="";
 $temp="";
-@$fp = fsockopen("192.168.11.44", 80, $errno, $errstr, 2);   //  edit this to contain IP number assigned to ESP8266 and port.
+@$fp = fsockopen("192.168.11.44", 80, $errno, $errstr, 2);   //  edit this to contain IP number and port assigned to ESP8266.
 if (!$fp) {
 	//  echo error message $errstr if wanted.  !$fp indicates that this script cannot reach the ESP.
 	}
