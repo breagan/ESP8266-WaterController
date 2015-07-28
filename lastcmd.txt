@@ -1,1 +1,1 @@
-zone0=60&zone1=60&zone2=60:July 25, 3:11 pm
+zone0=10&zone1=10&zone2=10:July 28, 8:29 am
