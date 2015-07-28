@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <title>ESP Water Controller</title>
@@ -43,7 +44,7 @@ if(!$temp){echo "<B><center>Controller is Offline..."; exit;}
 ?>
 	<table cellpadding = "5"  bgcolor="#ADD6AD" border="1" width="300">
 	<tr>
-	<td><form action="action_page.php"method = "post" >
+	<td><form action="sendcmd.php"method = "post" >
 	<font size="5"><center>All zones-60 min each <br>3 hours total</font>
 	<input type="hidden" name="zone0" value="60">
 	<input type="hidden" name="zone1" value="60">
@@ -53,7 +54,7 @@ if(!$temp){echo "<B><center>Controller is Offline..."; exit;}
 	</tr>
 	</table>
    <table cellpadding = "5"  bgcolor="#ADD6AD" border="1" width=300>
-   <form action="action_page.php" method = "post">
+   <form action="sendcmd.php" method = "post">
     <tr>
 	<td  colspan="2"><font size="5"><center>Individual Zones.</font></td>
 	<TR>
@@ -106,7 +107,7 @@ if(!$temp){echo "<B><center>Controller is Offline..."; exit;}
 <table cellpadding = "5"  bgcolor="#FFB2B2" border="1" width=300>
   <tr><td>
 
-<form action="action_page.php" method = "post">
+<form action="sendcmd.php" method = "post">
 <font size="5"><center>Stop all zones.<BR><BR></font>
 <input type="hidden" name="stop" value="stop">
 <input type="submit" value ="STOP all Zones">
