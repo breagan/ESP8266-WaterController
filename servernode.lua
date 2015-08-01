@@ -29,7 +29,8 @@ collectgarbage();
           totalendtime = nil
           totaltimestart = nil
           endtime = nil
-          dofile("control.lua") end
+       -- dofile("control.lua") end
+		  dofile("control.lc") end
           payload2 = nil 
  end)
 end)
