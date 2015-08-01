@@ -12,6 +12,7 @@ width:320px;
 height:50%;
 }
   </style>
+
 </head>
 
 <body style="background-color:#FFFCEA">
@@ -103,27 +104,60 @@ if(!$temp){echo "<B><center>Controller is Offline..."; exit;}
   </td>
 </tr>
   </table>
-
-<table cellpadding = "5"  bgcolor="#FFB2B2" border="1" width=300>
-  <tr><td>
-
-<form action="sendcmd.php" method = "post">
-<font size="5"><center>Stop all zones.<BR><BR></font>
-<input type="hidden" name="stop" value="stop">
-<input type="submit" value ="STOP all Zones">
-</form>
-</td></tr></table>
-<?PHP
+<?php
 $fh = file("lastcmd.txt");               //  this file contains the last command sent to the ESP and time sent.  
-$timestamp = trim(substr($fh[0],27,100));
+//	echo $fh[0];
+//	echo "<BR>";
+$plusHour = 0;
+$plustime = trim(substr($fh[0],46,3));
+//echo $plustime;
+	if($plustime > 59) 
+		{
+			$plusHour = intval($plustime/60);
+			$plusMin = $plustime % 60;
+		}
+	else
+		{
+		$plusMin = $plustime;
+		}
+		
+		echo "<BR>";
+//echo $plusHour."  ".$plusMin;
+
+$start_time = trim(substr($fh[0],27,100));
+
+$timeMonth = trim(substr($fh[0],27,2));
+$timeDay = trim(substr($fh[0],30,2));
+$timeYear = trim(substr($fh[0],33,4));
+$hourAdd = 0;
+$timeMin = trim(substr($fh[0],41,2)) + $plusMin;
+  if($timeMin > 59) {$hourAdd = 1; $timeMin = $timeMin - 60;}
+$timeHour = trim(substr($fh[0],38,2)) + $plusHour + $hourAdd;
+  if($timeHour > 23) {$timeHour = $timeHour - 24;}
+$endtime = $timeMonth."/".$timeDay."/".$timeYear." ".$timeHour.":".$timeMin;
+//echo "<BR>Endtime:<BR>";
+//echo $endtime;
+
 $zone0= substr($fh[0],6,2);
 $zone1= substr($fh[0],15,2);
 $zone2= substr($fh[0],24,2);
 if(substr($fh[0],0,4) == "stop"){
-$zone0 = 0; $zone1=0; $zone2=0; $timestamp = "Stop";}
+$zone0 = 0; $zone1=0; $zone2=0; $start_time = "Stop";}
 if($zone0 == "00") {$zone0 = "off";}
 if($zone1 == "00") {$zone1 = "off";}
 if($zone2 == "00") {$zone2 = "off";}
+
+if($plustime > 0){
+
+echo "<table cellpadding = '5'  bgcolor='#FFB2B2' border='1' width=300>";
+echo "  <tr><td>";
+echo "<form action='sendcmd.php' method = 'post'>";
+echo "<font size='5'><center>Stop all zones.<BR><BR></font>";
+echo "<input type='hidden' name='stop' value='stop'>";
+echo "<input type='submit' value ='STOP all Zones'>";
+echo "</form>";
+echo "</td></tr></table>";
+echo "<p>";
 echo "<table cellpadding = '5'  bgcolor='#FFFFF8' border='1' width='300'>";
 echo "<tr>";
 echo "<td colspan='3'><center><font color='#928646'>Last command sent</td>";
@@ -133,11 +167,62 @@ echo "<td><font color='#928646'><center>Shrubs $zone1</td>";
 echo "<td><font color='#928646'><center>Front Yard $zone2</td>";
 echo "</tr>";
 echo "<tr>";
-echo "<td colspan='3'><center><font color='#928646'>$timestamp</td>";
+echo "<td colspan='3'><center><font color='#928646'>$start_time</td>";
 echo "</tr></table>";
-echo "<BR>";
-echo "<font color='#D3CFB5'><center>$mac<BR>";
+
+
+//echo "<BR>";
+//echo "<font color='#D3CFB5'><center>$mac<BR>";
+echo "</font>";
+	
+			echo "  <table cellpadding = '5'  bgcolor='#ADD6AD' border='1' width=300>";
+			echo "  <tr><td><center><span id='countdown'></span>";
+			echo "  </td>";
+			echo "  </tr></table>";
+		}
 ?>
 </div>
+<script>
+// set the date we're counting down to
+var target_date = new Date("<?php echo $endtime; ?>").getTime();
+ 
+// variables for time units
+var days, hours, minutes, seconds;
+ 
+// get tag element
+var countdown = document.getElementById("countdown");
+ 
+// update the tag with id "countdown" every 1 second
+setInterval(function () {
+ 
+    // find the amount of "seconds" between now and target
+    var current_date = new Date().getTime();
+    var seconds_left = (target_date - current_date) / 1000;
+    var rawseconds = seconds_left
+    
+	// do some time calculations
+    days = parseInt(seconds_left / 86400);
+    seconds_left = seconds_left % 86400;
+     
+    hours = parseInt(seconds_left / 3600);
+    seconds_left = seconds_left % 3600;
+     
+    minutes = parseInt(seconds_left / 60);
+    seconds = parseInt(seconds_left % 60);
+     
+    // format countdown string + set tag value
+    if(rawseconds < 0){rawseconds = 0} 
+	
+//	countdown.innerHTML = days + "d, " + hours + "h, "
+//   + minutes + "m, " + seconds + "s---- " + rawseconds;  
+    if(seconds <0) {hours = "0"; minutes = "0"; seconds = "0";}
+	if(hours <10) {hours = "0"+hours}
+	if(minutes <10) {minutes = "0"+minutes}
+	if(seconds <10) {seconds = "0"+seconds}
+	countdown.innerHTML = "Time remaining:  <B>" + hours + ":"
+    + minutes + ":" + seconds; 
+ 
+}, 1000);
+</script>
 </body>
 </html>
