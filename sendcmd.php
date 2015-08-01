@@ -13,6 +13,7 @@
 @$zone1 = $_POST['zone1'];
 @$zone2 = $_POST['zone2'];
 @$stop = $_POST['stop'];
+$totaltime = $zone0+$zone1+$zone2;
 
 $IP = "192.168.11.44";             //  IP to the ESP8266
 
@@ -36,8 +37,8 @@ if (!$fp) {
 	}
 
 $fh = fopen("lastcmd.txt", "w");                         // records the last command in a text file.  
-$datestamp = date("F j, g:i a"); 
-fwrite($fh, $request.":".$datestamp);
+$datestamp = date("m d Y H:i"); 
+fwrite($fh, $request.":".$datestamp." - ".$totaltime);
 fclose($fh);
 	
 
