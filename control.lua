@@ -27,7 +27,8 @@ print(node.heap())
 
 -- 100 converts input 45 to 4.5 seconds.  handy for debuging.
 -- 60000 converts input 45 to 45 minuits
-multiplyer = 100
+--multiplyer = 100
+multiplyer = 60000
 
 totaltimestart = tmr.now(3)   -- used for debugging to verify timers are working correctly.
 
